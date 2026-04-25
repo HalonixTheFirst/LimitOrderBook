@@ -1,3 +1,11 @@
 # ninja log v6
 13	261	7933766381902765	CMakeFiles/LimitOrderBook.dir/main.cpp.obj	fe2d63e938bebe58
 262	583	7933766384389991	LimitOrderBook.exe	8b5253efaea20185
+13	283	7985706527087256	CMakeFiles/LimitOrderBook.dir/main.cpp.obj	fe2d63e938bebe58
+284	904	7985706529785241	LimitOrderBook.exe	8b5253efaea20185
+15	847	7988065723220813	CMakeFiles/LimitOrderBook.dir/main.cpp.obj	fe2d63e938bebe58
+21	804	7988066122613843	CMakeFiles/LimitOrderBook.dir/main.cpp.obj	fe2d63e938bebe58
+14	978	7988066710276879	CMakeFiles/LimitOrderBook.dir/main.cpp.obj	fe2d63e938bebe58
+979	1210	7988066719922873	LimitOrderBook.exe	8b5253efaea20185
+15	766	7988066866466875	CMakeFiles/LimitOrderBook.dir/main.cpp.obj	fe2d63e938bebe58
+766	947	7988066873986905	LimitOrderBook.exe	8b5253efaea20185
