@@ -10,9 +10,11 @@ enum Side{
 };
 using Quantity = uint16_t;
 using Price = int32_t;
+using OrderId =int32_t;
 
 struct order {
-  order(Quantity qty_, Price price_, Side side_) {
+  order(OrderId id_,Quantity qty_, Price price_, Side side_) {
+    OrderId orderId=id_;
     initialQuantity = qty_;
     remainingQuantity = qty_;
     filledQuantity = 0;
@@ -39,9 +41,8 @@ struct Levels {
   std::map<Price,Level, std::greater<Price>> bids;
   std::map<Price,Level> asks;
 };
-using iterator = std::map<Price,Level>;
 class Orderbook{
-
+  std::unordered_map<OrderId,std::map<Price,Level>> Orders;
 };
 
 
