@@ -24,7 +24,7 @@ struct order {
     if (remainingQuantity >= qty_) remainingQuantity -= qty_;
   }
 
-  [[nodiscard]] bool isFilled() const {
+  [[nodiscard]] bool isFilled() const {//No discard??
     return remainingQuantity == 0;
   }
 
@@ -38,8 +38,8 @@ using Level = std::vector<order>;
 struct Levels {
   std::map<Price,Level, std::greater<Price>> bids;
   std::map<Price,Level> asks;
-
 };
+using iterator = std::map<Price,Level>;
 class Orderbook{
 
 };
