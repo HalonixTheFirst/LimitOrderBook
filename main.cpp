@@ -66,6 +66,9 @@ public:
   void matchOrder() {
 
   }
+  void cancelOrder() {
+
+  }
 };
 
 
