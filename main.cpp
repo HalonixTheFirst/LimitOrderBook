@@ -12,12 +12,11 @@ using Quantity = uint16_t;
 using Price = int32_t;
 using OrderId =int32_t;
 
-struct order {
-  order(OrderId id_,Quantity qty_, Price price_, Side side_) {
-    OrderId orderId=id_;
+struct Order {
+  Order(OrderId id_,Quantity qty_, Price price_, Side side_) {
+    orderId = id_;
     initialQuantity = qty_;
     remainingQuantity = qty_;
-    filledQuantity = 0;
     price = price_;
     side = side_;
   }
@@ -25,24 +24,30 @@ struct order {
   void fill(Quantity qty_) {
     if (remainingQuantity >= qty_) remainingQuantity -= qty_;
   }
-
+  Quantity getFilledQuantity() {
+    return initialQuantity - remainingQuantity;
+  }
   [[nodiscard]] bool isFilled() const {//No discard??
     return remainingQuantity == 0;
   }
-
+  OrderId orderId;
   Quantity initialQuantity;
   Quantity remainingQuantity;
-  Quantity filledQuantity;
   Price price;
   Side side;
 };
-using Level = std::vector<order>;
-struct Levels {
-  std::map<Price,Level, std::greater<Price>> bids;
-  std::map<Price,Level> asks;
+using orderPointer = std::shared_ptr<Order>;
+using orderPointers = std::list<orderPointer>;
+struct OrderEntry {
+  orderPointer order;
+  orderPointers::iterator location;
+
 };
 class Orderbook{
-  std::unordered_map<OrderId,std::map<Price,Level>> Orders;
+  std::map<Price,orderPointers> asks;
+  std::map<Price,orderPointers,std::greater<Price>> bids;
+
+  std::unordered_map<OrderId,OrderEntry> orders;
 };
 
 
