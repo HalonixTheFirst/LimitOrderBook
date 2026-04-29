@@ -48,6 +48,24 @@ class Orderbook{
   std::map<Price,orderPointers,std::greater<Price>> bids;
 
   std::unordered_map<OrderId,OrderEntry> orders;
+public:
+  void addOrder(Order order) {
+    if (orders.contains(order.orderId)) return;
+    orderPointer ptr = std::make_shared<Order>(order);
+    orderPointers::iterator it;
+    if (order.side == buy) {
+      bids[order.price].push_back(ptr);
+      it = std::prev(bids[order.price].end());
+    }
+    else {
+      asks[order.price].push_back(ptr);
+      it = std::prev(asks[order.price].end());
+    }
+    orders[order.orderId]= OrderEntry{ptr,it};
+  }
+  void matchOrder() {
+
+  }
 };
 
 
