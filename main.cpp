@@ -100,7 +100,11 @@ public:
       }
     }
   }
-  void cancelOrder() {
+  void cancelOrder(OrderId id) {
+    auto order = orders.find(id);
+    if (order == orders.end()) return;
+
+
 
   }
 };
