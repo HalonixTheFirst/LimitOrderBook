@@ -27,7 +27,7 @@ struct Order {
   Quantity getFilledQuantity() {
     return initialQuantity - remainingQuantity;
   }
-  [[nodiscard]] bool isFilled() const {//No discard??
+  [[nodiscard]] bool isFilled() const {
     return remainingQuantity == 0;
   }
   OrderId getOrderId() {
