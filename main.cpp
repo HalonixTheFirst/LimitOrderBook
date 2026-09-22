@@ -30,6 +30,7 @@ struct Order {
   [[nodiscard]] bool isFilled() const {//No discard??
     return remainingQuantity == 0;
   }
+private:
   OrderId orderId;
   Quantity initialQuantity;
   Quantity remainingQuantity;
