@@ -24,7 +24,7 @@ struct Order {
   void fill(Quantity qty_) {
     if (remainingQuantity >= qty_) remainingQuantity -= qty_;
   }
-  Quantity getFilledQuantity() {
+  [[nodiscard]] Quantity getFilledQuantity() const {
     return initialQuantity - remainingQuantity;
   }
   [[nodiscard]] bool isFilled() const {
@@ -55,7 +55,7 @@ struct OrderEntry {
 };
 class Orderbook{
   std::map<Price,orderPointers> asks;
-  std::map<Price,orderPointers,std::greater<Price>> bids;
+  std::map<Price,orderPointers,std::greater<>> bids;
 
   std::unordered_map<OrderId,OrderEntry> orders;
 public:
