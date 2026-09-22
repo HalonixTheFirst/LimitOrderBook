@@ -82,8 +82,8 @@ public:
       auto ask = asks.begin();
       Price bidPrice = bid->first;
       Price askPrice = ask->first;
-      if ()
-      if (bid->first>=ask->first) {
+      if (bidPrice < askPrice ) break;
+      if (bidPrice >=askPrice) {
         auto bidOrder=bid->second.front();
         auto askOrder = ask->second.front();
         Quantity quantityToFill = std::min(askOrder->getRemainingQuantity(),bidOrder->getRemainingQuantity();
