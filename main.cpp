@@ -97,6 +97,7 @@ public:
           orders.erase(bidOrder->getOrderId());
           bid->second.pop_front();
         }
+
         if (bid->second.empty()) {
           bids.erase(bid);
         }
