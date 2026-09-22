@@ -77,7 +77,7 @@ public:
     orders[order.getOrderId()]= OrderEntry{ptr,it};
   }
   void matchOrder() {
-    while (asks.size() && bids.size()){
+    while (!asks.empty() && !bids.empty()){
       auto bid = bids.begin();
       auto ask = asks.begin();
       Price bidPrice = bid->first;
@@ -86,9 +86,17 @@ public:
       if (bidPrice >=askPrice) {
         auto bidOrder=bid->second.front();
         auto askOrder = ask->second.front();
-        Quantity quantityToFill = std::min(askOrder->getRemainingQuantity(),bidOrder->getRemainingQuantity();
+        Quantity quantityToFill = std::min(askOrder->getRemainingQuantity(),bidOrder->getRemainingQuantity());
         askOrder->fill(quantityToFill);
         bidOrder->fill(quantityToFill);
+        if (askOrder->isFilled()) {
+          orders.erase(askOrder->getOrderId());
+          ask->second.pop_front();
+        }
+        if (bidOrder->isFilled()) {
+          orders.erase(bidOrder->getOrderId());
+          bid->second.pop_front();
+        }
       }
     }
   }
