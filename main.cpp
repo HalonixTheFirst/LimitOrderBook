@@ -30,6 +30,15 @@ struct Order {
   [[nodiscard]] bool isFilled() const {//No discard??
     return remainingQuantity == 0;
   }
+  OrderId getOrderId() {
+    return orderId;
+  }
+  Price getOrderPrice() {
+    return price;
+  }
+  Side getOrderSide() {
+    return side;
+  }
 private:
   OrderId orderId;
   Quantity initialQuantity;
@@ -51,18 +60,18 @@ class Orderbook{
   std::unordered_map<OrderId,OrderEntry> orders;
 public:
   void addOrder(Order order) {
-    if (orders.contains(order.orderId)) return;
+    if (orders.contains(order.getOrderId())) return;
     orderPointer ptr = std::make_shared<Order>(order);
     orderPointers::iterator it;
-    if (order.side == buy) {
-      bids[order.price].push_back(ptr);
-      it = std::prev(bids[order.price].end());
+    if (order.getOrderSide() == buy) {
+      bids[order.getOrderPrice()].push_back(ptr);
+      it = std::prev(bids[order.getOrderPrice()].end());
     }
     else {
-      asks[order.price].push_back(ptr);
-      it = std::prev(asks[order.price].end());
+      asks[order.getOrderPrice()].push_back(ptr);
+      it = std::prev(asks[order.getOrderPrice()].end());
     }
-    orders[order.orderId]= OrderEntry{ptr,it};
+    orders[order.getOrderId()]= OrderEntry{ptr,it};
   }
   void matchOrder() {
 
