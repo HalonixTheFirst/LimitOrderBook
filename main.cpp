@@ -97,13 +97,36 @@ public:
           orders.erase(bidOrder->getOrderId());
           bid->second.pop_front();
         }
+        if (bid->second.empty()) {
+          bids.erase(bid);
+        }
+        if (ask->second.empty()) {
+          asks.erase(ask);
+        }
       }
     }
   }
   void cancelOrder(OrderId id) {
     auto order = orders.find(id);
     if (order == orders.end()) return;
-
+    auto entry = order->second;
+    Price price =entry.order->getOrderPrice();
+    Side side = entry.order->getOrderSide();
+    if (side == buy) {
+      auto& list = bids[price];
+      list.erase(entry.location);
+      if (list.empty()) {
+        bids.erase(price);
+      }
+    }
+    else if (side == sell) {
+      auto& list = asks[price];
+      list.erase(entry.location);
+      if (list.empty()) {
+        asks.erase(price);
+      }
+    }
+    orders.erase(order);
 
 
   }
