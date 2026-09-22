@@ -39,6 +39,9 @@ struct Order {
   [[nodiscard]] Side getOrderSide() const {
     return side;
   }
+  [[nodiscard]] Quantity getRemainingQuantity() const {
+    return remainingQuantity;
+  }
 private:
   OrderId orderId;
   Quantity initialQuantity;
@@ -74,7 +77,20 @@ public:
     orders[order.getOrderId()]= OrderEntry{ptr,it};
   }
   void matchOrder() {
-
+    while (asks.size() && bids.size()){
+      auto bid = bids.begin();
+      auto ask = asks.begin();
+      Price bidPrice = bid->first;
+      Price askPrice = ask->first;
+      if ()
+      if (bid->first>=ask->first) {
+        auto bidOrder=bid->second.front();
+        auto askOrder = ask->second.front();
+        Quantity quantityToFill = std::min(askOrder->getRemainingQuantity(),bidOrder->getRemainingQuantity();
+        askOrder->fill(quantityToFill);
+        bidOrder->fill(quantityToFill);
+      }
+    }
   }
   void cancelOrder() {
 
