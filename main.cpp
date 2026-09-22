@@ -30,13 +30,13 @@ struct Order {
   [[nodiscard]] bool isFilled() const {
     return remainingQuantity == 0;
   }
-  OrderId const getOrderId() {
+  [[nodiscard]] OrderId getOrderId() const {
     return orderId;
   }
-  Price const getOrderPrice() {
+  [[nodiscard]] Price getOrderPrice() const {
     return price;
   }
-  Side getOrderSide() {
+  [[nodiscard]] Side getOrderSide() const {
     return side;
   }
 private:
